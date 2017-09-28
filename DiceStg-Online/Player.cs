@@ -43,7 +43,7 @@ namespace DiceStg_Online
         /// <summary>
         /// プレイヤーの位置
         /// </summary>
-        public Point Position { get; set; }
+        public Point Position { get; private set; }
 
         /// <summary>
         /// プレイヤーのHP
@@ -60,6 +60,38 @@ namespace DiceStg_Online
                     throw new ArgumentOutOfRangeException("HPは0未満の値に設定することができません。");
                 }
             }
+        }
+        
+        /// <summary>
+        /// 上に移動する
+        /// </summary>
+        public void Up()
+        {
+            Position.Y--;
+        }
+
+        /// <summary>
+        /// 下に移動する
+        /// </summary>
+        public void Down()
+        {
+            Position.Y++;
+        }
+
+        /// <summary>
+        /// 左に移動する
+        /// </summary>
+        public void Left()
+        {
+            Position.X--;
+        }
+
+        /// <summary>
+        /// 右に移動する
+        /// </summary>
+        public void Right()
+        {
+            Position.X++;
         }
         
         /// <summary>
