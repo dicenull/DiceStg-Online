@@ -1,9 +1,9 @@
-﻿namespace ShootingGameWithDice
+﻿namespace DiceStg_Online
 {
     /// <summary>
     /// 場所を表す構造体
     /// </summary>
-    struct Point
+    class Point
     {
         /// <summary>
         /// X座標の位置
