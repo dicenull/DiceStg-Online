@@ -16,6 +16,8 @@ namespace DiceStg_Online
         /// </summary>
         public static uint DefaultHp = 100;
 
+        public static int ShotInterval = 20;
+
         /// <summary>
         /// コンストラクタでIDとHPを設定
         /// </summary>
@@ -24,6 +26,7 @@ namespace DiceStg_Online
             Id = idSeed;
             idSeed++;
             Hp = (int)DefaultHp;
+            _shotIntervalCount = ShotInterval;
         }
 
         /// <summary>
@@ -61,6 +64,14 @@ namespace DiceStg_Online
                 }
             }
         }
+
+        /// <summary>
+        /// Shotできる状態か
+        /// </summary>
+        public bool CanShooting
+        {
+            get { return (_shotIntervalCount <= 0); }
+        }
         
         /// <summary>
         /// 上に移動する
@@ -68,6 +79,7 @@ namespace DiceStg_Online
         public void Up()
         {
             Position.Y--;
+            Update();
         }
 
         /// <summary>
@@ -76,6 +88,7 @@ namespace DiceStg_Online
         public void Down()
         {
             Position.Y++;
+            Update();
         }
 
         /// <summary>
@@ -84,6 +97,7 @@ namespace DiceStg_Online
         public void Left()
         {
             Position.X--;
+            Update();
         }
 
         /// <summary>
@@ -92,6 +106,16 @@ namespace DiceStg_Online
         public void Right()
         {
             Position.X++;
+            Update();
+        }
+
+        /// <summary>
+        /// 一動作毎に更新する用
+        /// </summary>
+        private void Update()
+        {
+            if (_shotIntervalCount > 0)
+                _shotIntervalCount--;
         }
         
         /// <summary>
@@ -100,5 +124,7 @@ namespace DiceStg_Online
         private static int idSeed = 0;
 
         private int _hp;
+
+        private int _shotIntervalCount;
     }
 }
