@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceStg-Online.Core", "DiceStg-Online\DiceStg-Online.Core.csproj", "{B3F646F3-F8FE-40BC-9B14-7309AABFF101}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceStg-OnlineCore", "DiceStg-Online\DiceStg-OnlineCore.csproj", "{B3F646F3-F8FE-40BC-9B14-7309AABFF101}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiceStg-OnlineStandAlone", "DiceStg-OnlineStandAlone\DiceStg-OnlineStandAlone.csproj", "{CC211C5A-8F49-4E8B-B3BE-A5A6CF0C6E5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B3F646F3-F8FE-40BC-9B14-7309AABFF101}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3F646F3-F8FE-40BC-9B14-7309AABFF101}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3F646F3-F8FE-40BC-9B14-7309AABFF101}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC211C5A-8F49-4E8B-B3BE-A5A6CF0C6E5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC211C5A-8F49-4E8B-B3BE-A5A6CF0C6E5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC211C5A-8F49-4E8B-B3BE-A5A6CF0C6E5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC211C5A-8F49-4E8B-B3BE-A5A6CF0C6E5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
