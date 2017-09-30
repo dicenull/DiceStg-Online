@@ -35,7 +35,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions.cs" />
     <Compile Include="Bullet.cs" />
+    <Compile Include="Field.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Point.cs" />
   </ItemGroup>
