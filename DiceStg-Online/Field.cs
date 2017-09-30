@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DiceStg_Online.Core
 {
-    class Field
+    public class Field
     {
         public static int DefaultWidth = 640;
         public static int DefaultHeight = 480;

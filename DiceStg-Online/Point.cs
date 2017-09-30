@@ -3,7 +3,7 @@
     /// <summary>
     /// 場所を表すクラス
     /// </summary>
-    class Point
+    public class Point
     {
         /// <summary>
         /// X座標の位置

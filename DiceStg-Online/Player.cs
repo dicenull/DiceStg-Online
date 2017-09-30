@@ -9,7 +9,7 @@ namespace DiceStg_Online.Core
     /// <summary>
     /// ゲームのプレイヤー
     /// </summary>
-    class Player
+    public class Player
     {
         /// <summary>
         /// プレイヤーの規定HP

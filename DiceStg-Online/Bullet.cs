@@ -11,7 +11,7 @@ namespace DiceStg_Online.Core
         Up, Down, Left, Right
     }
     
-    class Bullet
+    public class Bullet
     {
         public Point Position { get; private set; }
         public bool IsEnable { get; private set; }

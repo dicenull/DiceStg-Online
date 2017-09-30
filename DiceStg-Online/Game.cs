@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DiceStg_Online.Core
 {
-    class Game
+    public class Game
     {
         public Game(GameState initState)
         {
