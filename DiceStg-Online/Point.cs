@@ -1,4 +1,4 @@
-﻿namespace DiceStg_Online
+﻿namespace DiceStg_Online.Core
 {
     /// <summary>
     /// 場所を表すクラス

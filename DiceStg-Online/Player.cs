@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiceStg_Online
+namespace DiceStg_Online.Core
 {
     /// <summary>
     /// ゲームのプレイヤー
