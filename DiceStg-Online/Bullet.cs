@@ -25,6 +25,9 @@ namespace DiceStg_Online
 
         public void Update()
         {
+            if (!IsEnable)
+                return;
+
             switch(Direction)
             {
                 case Direction.Left:
@@ -40,6 +43,11 @@ namespace DiceStg_Online
                     Position.Y++;
                     break;
             }
+        }
+
+        public void Disabling()
+        {
+            IsEnable = false;
         }
 
         private Direction Direction { get; }
