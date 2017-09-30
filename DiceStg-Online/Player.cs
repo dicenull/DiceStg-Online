@@ -72,6 +72,27 @@ namespace DiceStg_Online
         {
             get { return (_shotIntervalCount <= 0); }
         }
+
+        public void Move(Actions action)
+        {
+            switch(action)
+            {
+                case Actions.MoveDown:
+                    Down();
+                    break;
+                case Actions.MoveUp:
+                    Up();
+                    break;
+                case Actions.MoveLeft:
+                    Left();
+                    break;
+                case Actions.MoveRight:
+                    Right();
+                    break;
+                default:
+                    break;
+            }
+        }
         
         /// <summary>
         /// 上に移動する
