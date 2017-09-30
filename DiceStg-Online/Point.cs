@@ -1,7 +1,7 @@
 ﻿namespace DiceStg_Online
 {
     /// <summary>
-    /// 場所を表す構造体
+    /// 場所を表すクラス
     /// </summary>
     class Point
     {
@@ -14,7 +14,9 @@
         /// Y座標の位置
         /// </summary>
         public int Y { get; set; }
-
+        
+        public Point() : this(0, 0) { }
+        
         /// <summary>
         /// 座標の指定して初期化する
         /// </summary>
@@ -41,7 +43,7 @@
 
             return p;
         }
-
+        
         public static Point operator+ (Point p1, Point p2)
         {
             return new Point(p1.X + p2.X, p1.Y + p2.Y);
@@ -60,6 +62,28 @@
         public static Point operator-(Point p, int v)
         {
             return new Point(p.X - v, p.Y - v);
+        }
+    }
+
+    static class PointExtensions
+    {
+        public static Point Move(this Point p, Actions action)
+        {
+            switch (action)
+            {
+                case Actions.MoveUp:
+                    return new Point(p.X, p.Y - 1);
+                case Actions.MoveDown:
+                    return new Point(p.X, p.Y + 1);
+                case Actions.MoveLeft:
+                    return new Point(p.X - 1, p.Y);
+                case Actions.MoveRight:
+                    return new Point(p.X + 1, p.Y);
+                case Actions.DoNothing:
+                    return p;
+            }
+
+            return p;
         }
     }
 }
