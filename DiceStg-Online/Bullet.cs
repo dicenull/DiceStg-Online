@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DiceStg_Online.Core
 {
-    enum Direction
+    public enum Direction
     {
         Up, Down, Left, Right
     }
