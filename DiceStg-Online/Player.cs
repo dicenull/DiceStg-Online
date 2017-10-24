@@ -27,6 +27,7 @@ namespace DiceStg_Online.Core
             idSeed++;
             Hp = (int)DefaultHp;
             _shotIntervalCount = ShotInterval;
+            Color = new ColorState(new Random(Id).Next(255), new Random(Id + 114).Next(255), new Random(Id + 514).Next(255));
         }
 
         /// <summary>
@@ -39,6 +40,16 @@ namespace DiceStg_Online.Core
         }
 
         /// <summary>
+        /// 場所と色を指定して初期化
+        /// </summary>
+        /// <param name="pos">プレイヤーの初期位置</param>
+        /// <param name="color">プレイヤーの色</param>
+        public Player(Point pos, ColorState color) : this(pos)
+        {
+            Color = color;
+        }
+
+        /// <summary>
         /// プレイヤーのID
         /// </summary>
         public int Id { get; }
@@ -47,6 +58,11 @@ namespace DiceStg_Online.Core
         /// プレイヤーの位置
         /// </summary>
         public Point Position { get; private set; }
+
+        /// <summary>
+        /// プレイヤーの色
+        /// </summary>
+        public ColorState Color { get; private set; }
 
         /// <summary>
         /// プレイヤーのHP
