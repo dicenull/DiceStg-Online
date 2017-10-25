@@ -8,6 +8,9 @@ using DxLibDLL;
 
 namespace DiceStg_Online.Dxlib
 {
+    /// <summary>
+    /// ゲームの状態を描画するクラス
+    /// </summary>
     public class GameStateDrawer
     {
         public GameStateDrawer()

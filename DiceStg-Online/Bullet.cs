@@ -6,40 +6,62 @@ using System.Threading.Tasks;
 
 namespace DiceStg_Online.Core
 {
-    public enum Direction
+    /// <summary>
+    /// 方向を列挙
+    /// </summary>
+    public enum DirectionState
     {
         Up, Down, Left, Right
     }
     
+    /// <summary>
+    /// 弾を管理するクラス
+    /// </summary>
     public class Bullet
     {
+        /// <summary>
+        /// 弾の場所
+        /// </summary>
         public Point Position { get; private set; }
+
+        /// <summary>
+        /// この弾が有効か
+        /// </summary>
         public bool IsEnable { get; private set; }
 
-        public Bullet(Player p, Direction dir)
+        /// <summary>
+        /// 方向と親のプレイヤーを指定して初期化する
+        /// </summary>
+        /// <param name="p">親プレイヤー</param>
+        /// <param name="dir">発射する方向</param>
+        public Bullet(Player p, DirectionState dir)
         {
             Position = p.Position;
             IsEnable = p.CanShooting;
             Direction = dir;
         }
 
+        /// <summary>
+        /// 弾の状態を更新する
+        /// </summary>
         public void Update()
         {
             if (!IsEnable)
                 return;
 
+            // 方向に応じて弾を動かす
             switch(Direction)
             {
-                case Direction.Left:
+                case DirectionState.Left:
                     Position.X--;
                     break;
-                case Direction.Right:
+                case DirectionState.Right:
                     Position.X++;
                     break;
-                case Direction.Up:
+                case DirectionState.Up:
                     Position.Y--;
                     break;
-                case Direction.Down:
+                case DirectionState.Down:
                     Position.Y++;
                     break;
             }
@@ -50,7 +72,7 @@ namespace DiceStg_Online.Core
             IsEnable = false;
         }
 
-        private Direction Direction { get; }
+        private DirectionState Direction { get; }
     }
     
 }

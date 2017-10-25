@@ -89,20 +89,20 @@ namespace DiceStg_Online.Core
             get { return (_shotIntervalCount <= 0); }
         }
 
-        public void Move(Actions action)
+        public void Move(ActionState action)
         {
             switch(action)
             {
-                case Actions.MoveDown:
+                case ActionState.MoveDown:
                     Down();
                     break;
-                case Actions.MoveUp:
+                case ActionState.MoveUp:
                     Up();
                     break;
-                case Actions.MoveLeft:
+                case ActionState.MoveLeft:
                     Left();
                     break;
-                case Actions.MoveRight:
+                case ActionState.MoveRight:
                     Right();
                     break;
                 default:

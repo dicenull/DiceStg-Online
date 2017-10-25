@@ -8,6 +8,9 @@ using DxLibDLL;
 
 namespace DiceStg_OnlineStandAlone.Phases
 {
+    /// <summary>
+    /// ゲームフェーズ
+    /// </summary>
     class GamePhase : Phase
     {
         public GamePhase(Game game)
@@ -15,32 +18,38 @@ namespace DiceStg_OnlineStandAlone.Phases
             this.game = game;
         }
 
+        /// <summary>
+        /// プレイヤーのアクションを元に更新する
+        /// </summary>
+        /// <returns></returns>
         protected override Phase update()
         {
-            List<Actions> actions = new List<Actions>();
+            List<ActionState> actions = new List<ActionState>();
 
             for (int i = 0; i < game.State.Players.Count; i++)
             {
-                Actions action = Actions.DoNothing;
+                ActionState action = ActionState.DoNothing;
                 
                 // テストとして0番目のプレイヤーのみ操作可能にした
                 if(i == 0)
                 {
                     if (key.IsPressed(DX.KEY_INPUT_W))
-                        action = Actions.MoveUp;
+                        action = ActionState.MoveUp;
                     if (key.IsPressed(DX.KEY_INPUT_S))
-                        action = Actions.MoveDown;
+                        action = ActionState.MoveDown;
                     if (key.IsPressed(DX.KEY_INPUT_D))
-                        action = Actions.MoveRight;
+                        action = ActionState.MoveRight;
                     if (key.IsPressed(DX.KEY_INPUT_A))
-                        action = Actions.MoveLeft;
+                        action = ActionState.MoveLeft;
                 }
 
                 actions.Add(action);
             }
             
+            // ゲーム状態を更新する
             game.Update(actions);
 
+            // ゲーム状態を描画する
             gameStateDrawer.Draw(game.State);
 
             return this;

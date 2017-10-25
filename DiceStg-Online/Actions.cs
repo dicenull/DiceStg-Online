@@ -1,6 +1,9 @@
 ﻿namespace DiceStg_Online.Core
 {
-    public enum Actions
+    /// <summary>
+    /// プレイヤーの行動列挙
+    /// </summary>
+    public enum ActionState
     {
         MoveUp,
         MoveDown,

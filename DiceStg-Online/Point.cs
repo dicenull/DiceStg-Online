@@ -67,19 +67,19 @@
 
     static class PointExtensions
     {
-        public static Point Move(this Point p, Actions action)
+        public static Point Move(this Point p, ActionState action)
         {
             switch (action)
             {
-                case Actions.MoveUp:
+                case ActionState.MoveUp:
                     return new Point(p.X, p.Y - 1);
-                case Actions.MoveDown:
+                case ActionState.MoveDown:
                     return new Point(p.X, p.Y + 1);
-                case Actions.MoveLeft:
+                case ActionState.MoveLeft:
                     return new Point(p.X - 1, p.Y);
-                case Actions.MoveRight:
+                case ActionState.MoveRight:
                     return new Point(p.X + 1, p.Y);
-                case Actions.DoNothing:
+                case ActionState.DoNothing:
                     return p;
             }
 

@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using DiceStg_Online.Core;
 using DiceStg_Online.Dxlib;
-using DiceStg_OnlineStandAlone;
 using DiceStg_OnlineStandAlone.Phases;
 using DxLibDLL;
 
@@ -27,7 +26,7 @@ namespace DiceStg_OnlineStandAlone
             players.Add(new Player(new Point(0, 10), ColorState.NextColor));
             players.Add(new Player(new Point(10, 10), ColorState.NextColor));
             
-            GameState state = new GameState(new Field(30, 30), players, 0);
+            GameState state = new GameState(new Field(30, 30), players);
 
             Phase phase = new GamePhase(new Game(state));
 
