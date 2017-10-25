@@ -41,6 +41,7 @@
     <Compile Include="Actions.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="ColorState.cs" />
+    <Compile Include="DiceStgObject.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameState.cs" />

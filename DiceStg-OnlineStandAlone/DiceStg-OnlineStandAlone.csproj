@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{CC211C5A-8F49-4E8B-B3BE-A5A6CF0C6E5B}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>DiceStg_OnlineStandAlone</RootNamespace>
     <AssemblyName>DiceStg-OnlineStandAlone</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -38,8 +38,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
     <Compile Include="Phases\GamePhase.cs" />
     <Compile Include="Phases\Phase.cs" />
+    <Compile Include="Clients\KeyboardPlayer.cs" />
+    <Compile Include="Clients\RoundTripPlayer.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
