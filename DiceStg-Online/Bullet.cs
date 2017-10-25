@@ -11,13 +11,13 @@ namespace DiceStg_Online.Core
     /// </summary>
     public enum DirectionState
     {
-        Up, Down, Left, Right
+        Up = 0, Down, Left, Right
     }
     
     /// <summary>
     /// 弾を管理するクラス
     /// </summary>
-    public class Bullet
+    public class Bullet : IDiceStgObject
     {
         /// <summary>
         /// 弾の場所
@@ -36,7 +36,7 @@ namespace DiceStg_Online.Core
         /// <param name="dir">発射する方向</param>
         public Bullet(Player p, DirectionState dir)
         {
-            Position = p.Position;
+            Position = p.Position.CopyTo();
             IsEnable = p.CanShooting;
             Direction = dir;
         }
@@ -65,6 +65,7 @@ namespace DiceStg_Online.Core
                     Position.Y++;
                     break;
             }
+            
         }
 
         public void Disabling()

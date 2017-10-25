@@ -9,7 +9,7 @@ namespace DiceStg_Online.Core
     /// <summary>
     /// ゲームのプレイヤー
     /// </summary>
-    public class Player
+    public class Player : IDiceStgObject
     {
         /// <summary>
         /// プレイヤーの規定HP
@@ -17,36 +17,32 @@ namespace DiceStg_Online.Core
         public static uint DefaultHp = 100;
 
         public static int ShotInterval = 20;
-
-        /// <summary>
-        /// コンストラクタでIDとHPを設定
-        /// </summary>
-        public Player()
-        {
-            Id = idSeed;
-            idSeed++;
-            Hp = (int)DefaultHp;
-            _shotIntervalCount = ShotInterval;
-            Color = new ColorState(new Random(Id).Next(255), new Random(Id + 114).Next(255), new Random(Id + 514).Next(255));
-        }
-
+        
         /// <summary>
         /// 場所を指定して初期化
         /// </summary>
         /// <param name="pos">プレイヤーの初期位置</param>
-        public Player(Point pos) : this()
-        {
-            Position = pos;
-        }
+        public Player(Point pos) : this(pos, ColorState.NextColor) { }
 
         /// <summary>
         /// 場所と色を指定して初期化
         /// </summary>
         /// <param name="pos">プレイヤーの初期位置</param>
         /// <param name="color">プレイヤーの色</param>
-        public Player(Point pos, ColorState color) : this(pos)
+        public Player(Point pos, ColorState color)
         {
+            Id = idSeed;
+            idSeed++;
+            Hp = (int)DefaultHp;
+            _shotIntervalCount = ShotInterval;
             Color = color;
+            Position = pos;
+
+            for (DirectionState ds = DirectionState.Up; ds <= DirectionState.Right; ds++)
+            {
+                _myBullets[ds] = new Bullet(this, ds);
+                _myBullets[ds].Disabling();
+            }
         }
 
         /// <summary>
@@ -63,6 +59,14 @@ namespace DiceStg_Online.Core
         /// プレイヤーの色
         /// </summary>
         public ColorState Color { get; private set; }
+        
+        public Bullet[] Bullets
+        {
+            get
+            {
+                return _myBullets.Values.ToArray();
+            }
+        }
 
         /// <summary>
         /// プレイヤーのHP
@@ -146,13 +150,31 @@ namespace DiceStg_Online.Core
             Update();
         }
 
+        public void Shot()
+        {
+            if (!CanShooting)
+                return;
+
+            for (DirectionState ds = DirectionState.Up; ds <= DirectionState.Right; ds++)
+            {
+                _myBullets[ds] = new Bullet(this, ds);
+            }
+
+            _shotIntervalCount = ShotInterval;
+        }
+
         /// <summary>
         /// 一動作毎に更新する用
         /// </summary>
-        private void Update()
+        public void Update()
         {
             if (_shotIntervalCount > 0)
                 _shotIntervalCount--;
+
+            for (DirectionState ds = DirectionState.Up; ds <= DirectionState.Right; ds++)
+            {
+                _myBullets[ds].Update();
+            }
         }
         
         /// <summary>
@@ -163,5 +185,7 @@ namespace DiceStg_Online.Core
         private int _hp;
 
         private int _shotIntervalCount;
+
+        private Dictionary<DirectionState, Bullet> _myBullets = new Dictionary<DirectionState, Bullet>();
     }
 }
