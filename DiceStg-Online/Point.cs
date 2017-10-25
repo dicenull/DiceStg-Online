@@ -43,6 +43,11 @@
 
             return p;
         }
+
+        public Point CopyTo()
+        {
+            return new Point(X, Y);
+        }
         
         public static Point operator+ (Point p1, Point p2)
         {
@@ -62,6 +67,21 @@
         public static Point operator-(Point p, int v)
         {
             return new Point(p.X - v, p.Y - v);
+        }
+
+        public static bool operator==(Point p1, Point p2)
+        {
+            return p1.X == p2.X && p1.Y == p2.Y;
+        }
+
+        public static bool operator!=(Point p1, Point p2)
+        {
+            return p1.X != p2.X || p1.Y != p2.Y;
+        }
+
+        public override string ToString()
+        {
+            return $"({X} , {Y})";
         }
     }
 
