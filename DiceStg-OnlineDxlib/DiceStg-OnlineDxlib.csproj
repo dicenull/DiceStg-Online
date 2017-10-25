@@ -44,7 +44,7 @@
     <Compile Include="KeyManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DiceStg-Online\DiceStg-OnlineCore.csproj">
+    <ProjectReference Include="..\DiceStg-OnlineCore\DiceStg-OnlineCore.csproj">
       <Project>{b3f646f3-f8fe-40bc-9b14-7309aabff101}</Project>
       <Name>DiceStg-OnlineCore</Name>
     </ProjectReference>

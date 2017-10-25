@@ -50,7 +50,7 @@
       <Project>{587ac068-6709-4a03-b516-780286eff292}</Project>
       <Name>DiceStg-OnlineDxlib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DiceStg-Online\DiceStg-OnlineCore.csproj">
+    <ProjectReference Include="..\DiceStg-OnlineCore\DiceStg-OnlineCore.csproj">
       <Project>{b3f646f3-f8fe-40bc-9b14-7309aabff101}</Project>
       <Name>DiceStg-OnlineCore</Name>
     </ProjectReference>
