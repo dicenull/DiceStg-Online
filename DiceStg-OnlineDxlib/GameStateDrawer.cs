@@ -17,6 +17,7 @@ namespace DiceStg_Online.Dxlib
         {
             FieldBasePos = new Point(16, 16);
             FieldRightBottomPos = new Point(640 - 16, 480 - 16);
+            StatusBasePos = new Point(460, 0);
         }
 
         /// <summary>
@@ -35,11 +36,18 @@ namespace DiceStg_Online.Dxlib
         public Point PlayersBasePos { get; set; }
 
         /// <summary>
+        /// ステータス描画の左上の座標
+        /// </summary>
+        public Point StatusBasePos { get; set; }
+
+        /// <summary>
         /// ゲームの状態を描画する。
         /// </summary>
         /// <param name="state">ゲームの状態</param>
         public void Draw(GameState state)
         {
+            DX.ClearDrawScreen();
+
             var field = state.Field;
             var players = state.Players;
 
@@ -57,7 +65,7 @@ namespace DiceStg_Online.Dxlib
                     var bas = new Point(
                         FieldBasePos.X + x * wh,
                         FieldBasePos.Y + y * wh);
-
+                    
                     DX.DrawFillBox(
                         bas.X, bas.Y,
                         bas.X + wh, bas.Y + wh,
@@ -78,8 +86,26 @@ namespace DiceStg_Online.Dxlib
 
                 // draw player
                 DX.DrawFillBox(bas.X, bas.Y, bas.X + wh, bas.Y + wh,
-                    DX.GetColor(c.R, c.G, c.B));
+                    c.DxColor());
+
+                // draw bullets
+                foreach (var bullet in player.Bullets)
+                {
+                    if(bullet.IsEnable)
+                    {
+                        var center = new Point(
+                            FieldBasePos.X + bullet.Position.X * wh + wh / 2,
+                            FieldBasePos.Y + bullet.Position.Y * wh + wh / 2);
+
+                        DX.DrawCircle(center.X, center.Y, wh / 2, c.DxColor());
+                    }
+                }
             }
+            
+            // draw turn
+            DX.DrawString(StatusBasePos.X, StatusBasePos.Y,
+                state.Turn.ToString(), DX.GetColor(255, 255, 255));
+            
         }
     }
 }

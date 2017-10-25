@@ -31,11 +31,14 @@ namespace DiceStg_Online.Core
         /// </summary>
         /// <param name="field">初期フィールド</param>
         /// <param name="players">参加するプレイヤー</param>
-        public GameState(Field field, List<Player> players)
+        /// <param name="turn">ターン数</param>
+        public GameState(Field field, List<Player> players, int turn)
         {
             Field = field;
             Players = players;
-            Turn = 0;
+            Turn = turn;
         }
+
+        public GameState(Field field, List<Player> players) : this(field, players, 0) { }
     }
 }

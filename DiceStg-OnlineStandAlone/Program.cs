@@ -21,16 +21,19 @@ namespace DiceStg_OnlineStandAlone
         {
             // game state init
             List<Player> players = new List<Player>();
-            players.Add(new Player(new Point(0, 0), ColorState.NextColor));
-            players.Add(new Player(new Point(10, 0), ColorState.NextColor));
-            players.Add(new Player(new Point(0, 10), ColorState.NextColor));
-            players.Add(new Player(new Point(10, 10), ColorState.NextColor));
+            var clients = new List<Client>();
+            players.Add(new Player(new Point(0, 0)));
+            clients.Add(new Clients.KeyboardClient(DX.KEY_INPUT_W, DX.KEY_INPUT_D, DX.KEY_INPUT_A, DX.KEY_INPUT_S, DX.KEY_INPUT_SPACE));
+            
+            players.Add(new Player(new Point(10, 0)));
+            clients.Add(new Clients.RoundTripPlayer());
             
             GameState state = new GameState(new Field(30, 30), players);
 
-            Phase phase = new GamePhase(new Game(state));
+            Phase phase = new GamePhase(new Game(state), clients);
 
             // Dxlib init
+            DX.ChangeWindowMode(DX.TRUE);
             DX.DxLib_Init();
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
 

@@ -32,9 +32,11 @@ namespace DiceStg_Online.Core
             {
                 throw new ArgumentException("プレイヤーの数と等しいアクションを入力してください。");
             }
+            
+            // 行動
+            actionPhase(actions);
 
-            // 移動
-            movePhase(actions);
+            judgePhase();
 
             // 状態を更新
             State = new GameState(State.Field, State.Players, State.Turn + 1);
@@ -45,11 +47,25 @@ namespace DiceStg_Online.Core
         /// </summary>
         public GameState State { get; private set; }
 
+        private void judgePhase()
+        {
+            for (int i = 0; i < State.Players.Count; i++)
+            {
+                Player player = State.Players[i];
+
+                foreach(Bullet bullet in player.Bullets)
+                {
+                    if (!isInField(bullet.Position))
+                        bullet.Disabling();
+                }
+            }
+        }
+
         /// <summary>
         /// アクションを元にオブジェクトを移動させる
         /// </summary>
         /// <param name="actions">プレイヤーごとのアクション</param>
-        private void movePhase(IList<ActionState> actions)
+        private void actionPhase(IList<ActionState> actions)
         {
             for(int i = 0;i < State.Players.Count;i++)
             {
@@ -62,17 +78,15 @@ namespace DiceStg_Online.Core
                     case ActionState.MoveDown:
                     case ActionState.MoveRight:
                     case ActionState.MoveLeft:
-                        if (isInField(player.Position.Move(action)))
+                        if (isInField(player.Position.Move(action)) && canPass(player.Position.Move(action)))
                             player.Move(action);
                         break;
                     case ActionState.Shot:
-                        if(player.CanShooting)
-                        {
-
-                        }
+                        player.Shot();
                         break;
                     case ActionState.DoNothing:
                     default:
+                        player.Update();
                         break;
                 }
 
@@ -88,5 +102,28 @@ namespace DiceStg_Online.Core
         {
             return (pos.X >= 0 && pos.Y >= 0 && pos.X < State.Field.Width && pos.Y < State.Field.Height);
         }
+        
+        private bool canPass(Point pos)
+        {
+            return (getObject(pos) == null);
+        }
+
+        private IDiceStgObject getObject(Point pos)
+        {
+            IDiceStgObject res = null;
+            foreach(Player p in State.Players)
+            {
+                if(p.Position == pos)
+                {
+                    res = p;
+                    break;
+                }
+            }
+
+            return res;
+        }
+        
+        // todo 通行可能か
+        // todo その場所に何があるか
     }
 }

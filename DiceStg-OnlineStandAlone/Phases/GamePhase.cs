@@ -13,9 +13,10 @@ namespace DiceStg_OnlineStandAlone.Phases
     /// </summary>
     class GamePhase : Phase
     {
-        public GamePhase(Game game)
+        public GamePhase(Game game, IList<Client> clients)
         {
             this.game = game;
+            this.clients = clients;
         }
 
         /// <summary>
@@ -28,21 +29,8 @@ namespace DiceStg_OnlineStandAlone.Phases
 
             for (int i = 0; i < game.State.Players.Count; i++)
             {
-                ActionState action = ActionState.DoNothing;
+                ActionState action = clients[i].Think(game.State, i);
                 
-                // テストとして0番目のプレイヤーのみ操作可能にした
-                if(i == 0)
-                {
-                    if (key.IsPressed(DX.KEY_INPUT_W))
-                        action = ActionState.MoveUp;
-                    if (key.IsPressed(DX.KEY_INPUT_S))
-                        action = ActionState.MoveDown;
-                    if (key.IsPressed(DX.KEY_INPUT_D))
-                        action = ActionState.MoveRight;
-                    if (key.IsPressed(DX.KEY_INPUT_A))
-                        action = ActionState.MoveLeft;
-                }
-
                 actions.Add(action);
             }
             
@@ -56,5 +44,6 @@ namespace DiceStg_OnlineStandAlone.Phases
         }
 
         private Game game;
+        private IList<Client> clients;
     }
 }
