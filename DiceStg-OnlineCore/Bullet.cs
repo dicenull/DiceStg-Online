@@ -7,14 +7,6 @@ using System.Threading.Tasks;
 namespace DiceStg_Online.Core
 {
     /// <summary>
-    /// 方向を列挙
-    /// </summary>
-    public enum DirectionState
-    {
-        Up = 0, Down, Left, Right
-    }
-    
-    /// <summary>
     /// 弾を管理するクラス
     /// </summary>
     public class Bullet : IDiceStgObject
