@@ -89,16 +89,13 @@ namespace DiceStg_Online.Dxlib
                     c.DxColor());
 
                 // draw bullets
-                foreach (var bullet in player.Bullets)
+                if (player.MyBullet.IsEnable)
                 {
-                    if(bullet.IsEnable)
-                    {
-                        var center = new Point(
-                            FieldBasePos.X + bullet.Position.X * wh + wh / 2,
-                            FieldBasePos.Y + bullet.Position.Y * wh + wh / 2);
+                    var center = new Point(
+                        FieldBasePos.X + player.MyBullet.Position.X * wh + wh / 2,
+                        FieldBasePos.Y + player.MyBullet.Position.Y * wh + wh / 2);
 
-                        DX.DrawCircle(center.X, center.Y, wh / 2, c.DxColor());
-                    }
+                    DX.DrawCircle(center.X, center.Y, wh / 2, c.DxColor());
                 }
             }
             

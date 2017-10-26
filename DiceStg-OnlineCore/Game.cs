@@ -52,12 +52,9 @@ namespace DiceStg_Online.Core
             for (int i = 0; i < State.Players.Count; i++)
             {
                 Player player = State.Players[i];
-
-                foreach(Bullet bullet in player.Bullets)
-                {
-                    if (!isInField(bullet.Position))
-                        bullet.Disabling();
-                }
+                
+                    if (!isInField(player.MyBullet.Position))
+                        player.MyBullet.Disabling();
             }
         }
 

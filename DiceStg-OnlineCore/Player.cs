@@ -38,11 +38,8 @@ namespace DiceStg_Online.Core
             Color = color;
             Position = pos;
 
-            for (DirectionState ds = DirectionState.Up; ds <= DirectionState.Right; ds++)
-            {
-                _myBullets[ds] = new Bullet(this, ds);
-                _myBullets[ds].Disabling();
-            }
+            MyBullet = new Bullet(this, Direction);
+            MyBullet.Disabling();
         }
 
         /// <summary>
@@ -56,18 +53,15 @@ namespace DiceStg_Online.Core
         public Point Position { get; private set; }
 
         /// <summary>
+        /// プレイヤーの方向
+        /// </summary>
+        public DirectionState Direction { get; private set; }
+
+        /// <summary>
         /// プレイヤーの色
         /// </summary>
         public ColorState Color { get; private set; }
         
-        public Bullet[] Bullets
-        {
-            get
-            {
-                return _myBullets.Values.ToArray();
-            }
-        }
-
         /// <summary>
         /// プレイヤーのHP
         /// </summary>
@@ -85,6 +79,8 @@ namespace DiceStg_Online.Core
             }
         }
 
+        public Bullet MyBullet { get; private set; }
+
         /// <summary>
         /// Shotできる状態か
         /// </summary>
@@ -98,58 +94,25 @@ namespace DiceStg_Online.Core
             switch(action)
             {
                 case ActionState.MoveDown:
-                    Down();
+                    Direction = DirectionState.Down;
                     break;
                 case ActionState.MoveUp:
-                    Up();
+                    Direction = DirectionState.Up;
                     break;
                 case ActionState.MoveLeft:
-                    Left();
+                    Direction = DirectionState.Left;
                     break;
                 case ActionState.MoveRight:
-                    Right();
+                    Direction = DirectionState.Right;
                     break;
                 default:
                     break;
             }
+
+            Position = Position.Move(action);
+            Update();
         }
         
-        /// <summary>
-        /// 上に移動する
-        /// </summary>
-        public void Up()
-        {
-            Position.Y--;
-            Update();
-        }
-
-        /// <summary>
-        /// 下に移動する
-        /// </summary>
-        public void Down()
-        {
-            Position.Y++;
-            Update();
-        }
-
-        /// <summary>
-        /// 左に移動する
-        /// </summary>
-        public void Left()
-        {
-            Position.X--;
-            Update();
-        }
-
-        /// <summary>
-        /// 右に移動する
-        /// </summary>
-        public void Right()
-        {
-            Position.X++;
-            Update();
-        }
-
         public void Shot()
         {
             if (!CanShooting)
@@ -158,11 +121,8 @@ namespace DiceStg_Online.Core
                 return;
             }
 
-            for (DirectionState ds = DirectionState.Up; ds <= DirectionState.Right; ds++)
-            {
-                _myBullets[ds] = new Bullet(this, ds);
-            }
-
+            MyBullet = new Bullet(this, Direction);
+            
             _shotIntervalCount = ShotInterval;
         }
 
@@ -174,10 +134,7 @@ namespace DiceStg_Online.Core
             if (_shotIntervalCount > 0)
                 _shotIntervalCount--;
 
-            for (DirectionState ds = DirectionState.Up; ds <= DirectionState.Right; ds++)
-            {
-                _myBullets[ds].Update();
-            }
+            MyBullet.Update();
         }
         
         /// <summary>
@@ -188,7 +145,6 @@ namespace DiceStg_Online.Core
         private int _hp;
 
         private int _shotIntervalCount;
-
-        private Dictionary<DirectionState, Bullet> _myBullets = new Dictionary<DirectionState, Bullet>();
+        
     }
 }
