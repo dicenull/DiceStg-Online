@@ -32,11 +32,12 @@ namespace DiceStg_Online.Core
             {
                 throw new ArgumentException("プレイヤーの数と等しいアクションを入力してください。");
             }
-            
+
+            // 判定
+            judgePhase();
+
             // 行動
             actionPhase(actions);
-
-            judgePhase();
 
             // 状態を更新
             State = new GameState(State.Field, State.Players, State.Turn + 1);
@@ -58,9 +59,11 @@ namespace DiceStg_Online.Core
 
                 IDiceStgObject obj = getObject(player.Position);
 
-                if (!isInField(player.MyBullet.Position))
+                // 画面買いに行く弾は無効化
+                if (!isInField(player.MyBullet.Position.Move(player.MyBullet.Direction)))
                     player.MyBullet.Disabling();
 
+                // プレイヤーの位置に弾があったらダメージ計算
                 if (obj is Bullet && player.Position == obj.Position)
                 {
                     Bullet bullet = obj as Bullet;
@@ -95,8 +98,9 @@ namespace DiceStg_Online.Core
                     case ActionState.MoveDown:
                     case ActionState.MoveRight:
                     case ActionState.MoveLeft:
-                        if (isInField(player.Position.Move(action)) && canPass(player.Position.Move(action)))
-                            player.Move(action);
+                        var dir = action.ToDirection();
+                        if (isInField(player.Position.Move(dir)) && canPass(player.Position.Move(dir)))
+                            player.Move(dir);
                         else
                             player.ChangeDirection(action);
                         break;
