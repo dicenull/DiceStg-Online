@@ -18,7 +18,7 @@
     /// </summary>
     public enum DirectionState
     {
-        Up = 0, Down, Left, Right
+        Up = 0, Down, Left, Right, Origin
     }
 
     /// <summary>
