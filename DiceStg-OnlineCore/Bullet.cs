@@ -22,16 +22,25 @@ namespace DiceStg_Online.Core
         public bool IsEnable { get; private set; }
 
         /// <summary>
+        /// 弾のダメージ量
+        /// </summary>
+        public int Damage { get; private set; }
+
+        /// <summary>
         /// 方向と親のプレイヤーを指定して初期化する
         /// </summary>
         /// <param name="p">親プレイヤー</param>
         /// <param name="dir">発射する方向</param>
-        public Bullet(Player p, DirectionState dir)
+        /// <param name="damage">弾のダメージ量</param>
+        public Bullet(Player p, DirectionState dir, int damage)
         {
             Position = p.Position.CopyTo();
             IsEnable = p.CanShooting;
             Direction = dir;
+            Damage = damage;
         }
+
+        public Bullet(Player p, DirectionState dir) : this(p, dir, 3) { }
 
         /// <summary>
         /// 弾の状態を更新する
