@@ -86,7 +86,7 @@ namespace DiceStg_Online.Core
         /// </summary>
         public bool CanShooting
         {
-            get { return (_shotIntervalCount <= 0); }
+            get { return (_shotIntervalCount <= 0 && !MyBullet.IsEnable); }
         }
 
         public void ChangeDirection(ActionState action)
