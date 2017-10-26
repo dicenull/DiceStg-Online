@@ -27,6 +27,12 @@ namespace DiceStg_OnlineStandAlone
             
             players.Add(new Player(new Point(10, 0)));
             clients.Add(new Clients.RoundTripPlayer());
+
+            players.Add(new Player(new Point(5, 5)));
+            clients.Add(new Clients.DoNothingClient());
+
+            players.Add(new Player(new Point(25, 20)));
+            clients.Add(new Clients.RansuchanClient());
             
             GameState state = new GameState(new Field(30, 30), players);
 
