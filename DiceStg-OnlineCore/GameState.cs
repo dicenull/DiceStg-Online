@@ -44,6 +44,8 @@ namespace DiceStg_Online.Core
             Turn = turn;
         }
 
+        public GameState(GameState state) : this(state.Field, state.Players, state.Turn) { }
+
         public GameState(Field field, List<Player> players) : this(field, players, 0) { }
     }
 }
