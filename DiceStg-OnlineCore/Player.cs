@@ -153,7 +153,10 @@ namespace DiceStg_Online.Core
         public void Shot()
         {
             if (!CanShooting)
+            {
+                Update();
                 return;
+            }
 
             for (DirectionState ds = DirectionState.Up; ds <= DirectionState.Right; ds++)
             {
