@@ -87,23 +87,22 @@
 
     static class PointExtensions
     {
-        public static Point Move(this Point p, ActionState action)
+        public static Point Move(this Point p, DirectionState dir)
         {
-            switch (action)
+            switch (dir)
             {
-                case ActionState.MoveUp:
+                case DirectionState.Up:
                     return new Point(p.X, p.Y - 1);
-                case ActionState.MoveDown:
+                case DirectionState.Down:
                     return new Point(p.X, p.Y + 1);
-                case ActionState.MoveLeft:
+                case DirectionState.Left:
                     return new Point(p.X - 1, p.Y);
-                case ActionState.MoveRight:
+                case DirectionState.Right:
                     return new Point(p.X + 1, p.Y);
-                case ActionState.DoNothing:
+                case DirectionState.Origin:
+                default:
                     return p;
             }
-
-            return p;
         }
     }
 }

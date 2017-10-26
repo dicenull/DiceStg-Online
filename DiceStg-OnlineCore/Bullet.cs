@@ -51,22 +51,7 @@ namespace DiceStg_Online.Core
                 return;
 
             // 方向に応じて弾を動かす
-            switch(Direction)
-            {
-                case DirectionState.Left:
-                    Position = Position.Move(ActionState.MoveLeft);
-                    break;
-                case DirectionState.Right:
-                    Position = Position.Move(ActionState.MoveRight);
-                    break;
-                case DirectionState.Up:
-                    Position = Position.Move(ActionState.MoveUp);
-                    break;
-                case DirectionState.Down:
-                    Position = Position.Move(ActionState.MoveDown);
-                    break;
-            }
-            
+            Position = Position.Move(Direction);
         }
 
         public void Disabling()
@@ -74,7 +59,7 @@ namespace DiceStg_Online.Core
             IsEnable = false;
         }
 
-        private DirectionState Direction { get; }
+        public DirectionState Direction { get; }
     }
     
 }

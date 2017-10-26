@@ -14,7 +14,7 @@ namespace DiceStg_Online.Core
         /// <summary>
         /// プレイヤーの規定HP
         /// </summary>
-        public static uint DefaultHp = 10;
+        public static uint DefaultHp = 50;
 
         public static int ShotInterval = 20;
         
@@ -123,10 +123,10 @@ namespace DiceStg_Online.Core
             }
         }
 
-        public void Move(ActionState action)
+        public void Move(DirectionState dir)
         {
-            ChangeDirection(action);
-            Position = Position.Move(action);
+            Direction = dir;
+            Position = Position.Move(dir);
             Update();
         }
         
