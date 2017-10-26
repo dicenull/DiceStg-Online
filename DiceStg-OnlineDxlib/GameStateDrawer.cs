@@ -94,14 +94,15 @@ namespace DiceStg_Online.Dxlib
                            FieldBasePos.X + x * wh,
                            FieldBasePos.Y + y * wh);
 
-                var hpos = new Point(HpBasePos.X, HpBasePos.Y + 10 * i);
+                var hpos = new Point(HpBasePos.X, HpBasePos.Y + 15 * i);
                 
                 // draw player
                 DX.DrawFillBox(bas.X, bas.Y, bas.X + wh, bas.Y + wh,
                     c.DxColor());
 
                 // draw player status
-                DX.DrawFillBox(hpos.X, hpos.Y, hpos.X + player.Hp, hpos.Y + 5, player.Color.DxColor());
+                DX.DrawString(hpos.X, hpos.Y, player.Hp.ToString(), c.DxColor());
+                DX.DrawFillBox(hpos.X + 30, hpos.Y, hpos.X + player.Hp + 30, hpos.Y + 5, c.DxColor());
 
                 // draw bullets
                 if (player.MyBullet.IsEnable)
@@ -115,7 +116,7 @@ namespace DiceStg_Online.Dxlib
                 i++;
             }
             
-            statuses.Add(state.Turn.ToString());
+            statuses.Add("Turn : " + state.Turn.ToString());
             // draw turn
             for(i =0;i < statuses.Count;i++)
             {
