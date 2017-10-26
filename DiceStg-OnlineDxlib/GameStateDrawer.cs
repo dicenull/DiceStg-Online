@@ -17,7 +17,8 @@ namespace DiceStg_Online.Dxlib
         {
             FieldBasePos = new Point(16, 16);
             FieldRightBottomPos = new Point(640 - 16, 480 - 16);
-            StatusBasePos = new Point(460, 0);
+            StatusBasePos = new Point(460, 20);
+            HpBasePos = new Point(460, 200);
         }
 
         /// <summary>
@@ -41,6 +42,11 @@ namespace DiceStg_Online.Dxlib
         public Point StatusBasePos { get; set; }
 
         /// <summary>
+        /// HP描画の左上の座標
+        /// </summary>
+        public Point HpBasePos { get; set; }
+
+        /// <summary>
         /// ゲームの状態を描画する。
         /// </summary>
         /// <param name="state">ゲームの状態</param>
@@ -56,6 +62,10 @@ namespace DiceStg_Online.Dxlib
             var s1 = (field.Width > 0) ? (rb.X - lt.X) / field.Width : 0;
             var s2 = (field.Height > 0) ? (rb.Y - lt.Y) / field.Height : 0;
             var wh = Math.Min(s1, s2);
+
+            int i = 0;
+
+            List<string> statuses = new List<string>();
 
             // フィールド
             for (var y = 0; y < field.Height; ++y)
@@ -84,9 +94,14 @@ namespace DiceStg_Online.Dxlib
                            FieldBasePos.X + x * wh,
                            FieldBasePos.Y + y * wh);
 
+                var hpos = new Point(HpBasePos.X, HpBasePos.Y + 10 * i);
+                
                 // draw player
                 DX.DrawFillBox(bas.X, bas.Y, bas.X + wh, bas.Y + wh,
                     c.DxColor());
+
+                // draw player status
+                DX.DrawFillBox(hpos.X, hpos.Y, hpos.X + player.Hp, hpos.Y + 5, player.Color.DxColor());
 
                 // draw bullets
                 if (player.MyBullet.IsEnable)
@@ -97,12 +112,17 @@ namespace DiceStg_Online.Dxlib
 
                     DX.DrawCircle(center.X, center.Y, wh / 2, c.DxColor());
                 }
+                i++;
             }
             
+            statuses.Add(state.Turn.ToString());
             // draw turn
-            DX.DrawString(StatusBasePos.X, StatusBasePos.Y,
-                state.Turn.ToString(), DX.GetColor(255, 255, 255));
-            
+            for(i =0;i < statuses.Count;i++)
+            {
+                DX.DrawString(StatusBasePos.X, StatusBasePos.Y + i * 15,
+                statuses[i], DX.GetColor(255, 255, 255));
+            }
+
         }
     }
 }

@@ -52,9 +52,29 @@ namespace DiceStg_Online.Core
             for (int i = 0; i < State.Players.Count; i++)
             {
                 Player player = State.Players[i];
-                
-                    if (!isInField(player.MyBullet.Position))
-                        player.MyBullet.Disabling();
+                IDiceStgObject obj = getObject(player.Position);
+
+                if (!isInField(player.MyBullet.Position))
+                    player.MyBullet.Disabling();
+
+                if (obj is Bullet && player.Position == obj.Position)
+                {
+                    Bullet bullet = obj as Bullet;
+
+                    if (!bullet.IsEnable)
+                        continue;
+
+                    if(player.Hp <= bullet.Damage)
+                    {
+                        // player dead
+                    }
+                    else
+                    {
+                        player.Hp -= bullet.Damage;
+                    }
+
+                    bullet.Disabling();
+                }
             }
         }
 
@@ -77,6 +97,8 @@ namespace DiceStg_Online.Core
                     case ActionState.MoveLeft:
                         if (isInField(player.Position.Move(action)) && canPass(player.Position.Move(action)))
                             player.Move(action);
+                        else
+                            player.ChangeDirection(action);
                         break;
                     case ActionState.Shot:
                         player.Shot();
@@ -102,7 +124,7 @@ namespace DiceStg_Online.Core
         
         private bool canPass(Point pos)
         {
-            return (getObject(pos) == null);
+            return !(getObject(pos) is Player);
         }
 
         private IDiceStgObject getObject(Point pos)
@@ -113,6 +135,12 @@ namespace DiceStg_Online.Core
                 if(p.Position == pos)
                 {
                     res = p;
+                    break;
+                }
+
+                if(p.MyBullet.Position == pos)
+                {
+                    res = p.MyBullet;
                     break;
                 }
             }

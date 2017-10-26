@@ -80,7 +80,7 @@ namespace DiceStg_Online.Core
         }
 
         public Bullet MyBullet { get; private set; }
-
+        
         /// <summary>
         /// Shotできる状態か
         /// </summary>
@@ -89,7 +89,7 @@ namespace DiceStg_Online.Core
             get { return (_shotIntervalCount <= 0); }
         }
 
-        public void Move(ActionState action)
+        public void ChangeDirection(ActionState action)
         {
             switch(action)
             {
@@ -105,10 +105,12 @@ namespace DiceStg_Online.Core
                 case ActionState.MoveRight:
                     Direction = DirectionState.Right;
                     break;
-                default:
-                    break;
             }
+        }
 
+        public void Move(ActionState action)
+        {
+            ChangeDirection(action);
             Position = Position.Move(action);
             Update();
         }
