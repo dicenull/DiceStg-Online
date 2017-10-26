@@ -33,7 +33,7 @@ namespace DiceStg_OnlineStandAlone.Phases
                     actions.Add(ActionState.DoNothing);
                 else
                 {
-                    ActionState action = clients[i].Think(game.State, i);
+                    ActionState action = clients[i].Think(new GameState(game.State), i);
 
                     actions.Add(action);
                 }

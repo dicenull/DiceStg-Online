@@ -39,6 +39,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="Clients\DoNothingClient.cs" />
+    <Compile Include="Clients\RansuchanClient.cs" />
     <Compile Include="Phases\GamePhase.cs" />
     <Compile Include="Phases\Phase.cs" />
     <Compile Include="Clients\KeyboardPlayer.cs" />
