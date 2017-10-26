@@ -86,6 +86,9 @@ namespace DiceStg_Online.Dxlib
             // players
             foreach(var player in players)
             {
+                if (player.Dead)
+                    continue;
+
                 var x = player.Position.X;
                 var y = player.Position.Y;
                 var c = player.Color;

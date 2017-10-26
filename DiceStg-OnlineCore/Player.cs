@@ -14,7 +14,7 @@ namespace DiceStg_Online.Core
         /// <summary>
         /// プレイヤーの規定HP
         /// </summary>
-        public static uint DefaultHp = 100;
+        public static uint DefaultHp = 10;
 
         public static int ShotInterval = 20;
         
@@ -40,6 +40,7 @@ namespace DiceStg_Online.Core
 
             MyBullet = new Bullet(this, Direction);
             MyBullet.Disabling();
+            Alive = true;
         }
 
         /// <summary>
@@ -74,13 +75,27 @@ namespace DiceStg_Online.Core
                 if (_hp < 0)
                 {
                     _hp = 0;
-                    throw new ArgumentOutOfRangeException("HPは0未満の値に設定することができません。");
+                    MyBullet.Disabling();
+                    Alive = false;
                 }
             }
         }
 
+        /// <summary>
+        /// プレイヤーの弾
+        /// </summary>
         public Bullet MyBullet { get; private set; }
-        
+
+        /// <summary>
+        /// 生きているか
+        /// </summary>
+        public bool Alive { get; private set; }
+
+        /// <summary>
+        /// 死んでいるか
+        /// </summary>
+        public bool Dead { get { return !Alive; } }
+
         /// <summary>
         /// Shotできる状態か
         /// </summary>

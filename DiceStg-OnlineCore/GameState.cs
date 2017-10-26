@@ -27,6 +27,11 @@ namespace DiceStg_Online.Core
         public int Turn;
 
         /// <summary>
+        /// 生きているプレイヤーの数
+        /// </summary>
+        public int AlivePlayerCount { get { return Players.Select(p => p.Alive).Count(); } }
+
+        /// <summary>
         /// 必要な情報をもとに初期化する
         /// </summary>
         /// <param name="field">初期フィールド</param>

@@ -29,9 +29,14 @@ namespace DiceStg_OnlineStandAlone.Phases
 
             for (int i = 0; i < game.State.Players.Count; i++)
             {
-                ActionState action = clients[i].Think(game.State, i);
-                
-                actions.Add(action);
+                if (game.State.Players[i].Dead)
+                    actions.Add(ActionState.DoNothing);
+                else
+                {
+                    ActionState action = clients[i].Think(game.State, i);
+
+                    actions.Add(action);
+                }
             }
             
             // ゲーム状態を更新する

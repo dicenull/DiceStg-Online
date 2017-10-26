@@ -52,6 +52,10 @@ namespace DiceStg_Online.Core
             for (int i = 0; i < State.Players.Count; i++)
             {
                 Player player = State.Players[i];
+
+                if (player.Dead)
+                    continue;
+
                 IDiceStgObject obj = getObject(player.Position);
 
                 if (!isInField(player.MyBullet.Position))
@@ -64,15 +68,8 @@ namespace DiceStg_Online.Core
                     if (!bullet.IsEnable)
                         continue;
 
-                    if(player.Hp <= bullet.Damage)
-                    {
-                        // player dead
-                    }
-                    else
-                    {
-                        player.Hp -= bullet.Damage;
-                    }
-
+                    player.Hp -= bullet.Damage;
+                    
                     bullet.Disabling();
                 }
             }
@@ -89,6 +86,9 @@ namespace DiceStg_Online.Core
                 ActionState action = actions[i];
                 Player player = State.Players[i];
 
+                if (player.Dead)
+                    continue;
+                
                 switch (action)
                 {
                     case ActionState.MoveUp:
