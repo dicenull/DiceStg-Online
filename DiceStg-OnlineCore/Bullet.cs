@@ -45,16 +45,16 @@ namespace DiceStg_Online.Core
             switch(Direction)
             {
                 case DirectionState.Left:
-                    Position.X--;
+                    Position = Position.Move(ActionState.MoveLeft);
                     break;
                 case DirectionState.Right:
-                    Position.X++;
+                    Position = Position.Move(ActionState.MoveRight);
                     break;
                 case DirectionState.Up:
-                    Position.Y--;
+                    Position = Position.Move(ActionState.MoveUp);
                     break;
                 case DirectionState.Down:
-                    Position.Y++;
+                    Position = Position.Move(ActionState.MoveDown);
                     break;
             }
             
