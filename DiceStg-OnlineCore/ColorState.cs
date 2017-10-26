@@ -66,7 +66,7 @@ namespace DiceStg_Online.Core
     /// <summary>
     /// PaletteからColorを取得できるようにする
     /// </summary>
-    static class PaletteExtern
+    static class PaletteExtention
     {
         
         public static ColorState Color(this Palette palette)
