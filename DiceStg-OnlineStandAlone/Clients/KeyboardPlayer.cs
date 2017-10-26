@@ -27,6 +27,9 @@ namespace DiceStg_OnlineStandAlone.Clients
 
         public override ActionState Think(GameState state, int myPlayerNum)
         {
+            if (DX.CheckHitKey(keyShot) != 0)
+                return ActionState.Shot;
+            
             if (DX.CheckHitKey(keyUp) != 0)
                 return ActionState.MoveUp;
 
@@ -38,9 +41,6 @@ namespace DiceStg_OnlineStandAlone.Clients
 
             if (DX.CheckHitKey(keyDown) != 0)
                 return ActionState.MoveDown;
-
-            if (DX.CheckHitKey(keyShot) != 0)
-                return ActionState.Shot;
 
             return ActionState.DoNothing;
         }
