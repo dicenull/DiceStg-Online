@@ -10,6 +10,7 @@ namespace DiceStg_OnlineStandAlone
     public abstract class Client
     {
         public abstract ActionState Think(GameState state, int myPlayerNum);
-        
+
+        protected static Random rnd = new Random();
     }
 }

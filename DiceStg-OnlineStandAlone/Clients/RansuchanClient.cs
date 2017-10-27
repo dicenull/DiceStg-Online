@@ -20,7 +20,5 @@ namespace DiceStg_OnlineStandAlone.Clients
 
             return actions[rnd.Next(actions.Count)];
         }
-
-        private Random rnd = new Random();
     }
 }

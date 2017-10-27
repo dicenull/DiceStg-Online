@@ -40,6 +40,7 @@ namespace DiceStg_OnlineStandAlone
 
             // Dxlib init
             DX.ChangeWindowMode(DX.TRUE);
+            DX.SetMainWindowText("DiceStg-Offline");
             DX.DxLib_Init();
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
 
