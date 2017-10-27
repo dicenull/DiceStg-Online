@@ -50,10 +50,8 @@ namespace DiceStg_Online.Core
 
         private void judgePhase()
         {
-            for (int i = 0; i < State.Players.Count; i++)
+            foreach(Player player in State.Players)
             {
-                Player player = State.Players[i];
-
                 if (player.Dead)
                     continue;
 
@@ -133,26 +131,20 @@ namespace DiceStg_Online.Core
 
         private IDiceStgObject getObject(Point pos)
         {
-            IDiceStgObject res = null;
             foreach(Player p in State.Players)
             {
                 if(p.Position == pos)
                 {
-                    res = p;
-                    break;
+                    return p;
                 }
 
                 if(p.MyBullet.Position == pos)
                 {
-                    res = p.MyBullet;
-                    break;
+                    return p.MyBullet;
                 }
             }
 
-            return res;
+            return null;
         }
-        
-        // todo 通行可能か
-        // todo その場所に何があるか
     }
 }
