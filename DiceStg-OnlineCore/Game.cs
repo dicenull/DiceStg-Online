@@ -55,22 +55,22 @@ namespace DiceStg_Online.Core
                 if (player.Dead)
                     continue;
 
-                IDiceStgObject obj = getObject(player.Position);
-
-                // 画面買いに行く弾は無効化
+                // 画面外に行く弾は無効化
                 if (!isInField(player.MyBullet.Position.Move(player.MyBullet.Direction)))
                     player.MyBullet.Disabling();
+                
+                List<Bullet> objects = 
+                    getObjects(player.Position)
+                    .Where(obj => (obj is Bullet) && obj != player.MyBullet)
+                    .Select(obj => obj as Bullet).ToList();
 
                 // プレイヤーの位置に弾があったらダメージ計算
-                if (obj is Bullet && player.Position == obj.Position)
+                var bullets = objects.Where(obj => obj.Position == player.Position && obj.IsEnable);
+                
+                foreach(var bullet in bullets)
                 {
-                    Bullet bullet = obj as Bullet;
-
-                    if (!bullet.IsEnable)
-                        continue;
-
                     player.Hp -= bullet.Damage;
-                    
+
                     bullet.Disabling();
                 }
             }
@@ -97,7 +97,7 @@ namespace DiceStg_Online.Core
                     case ActionState.MoveRight:
                     case ActionState.MoveLeft:
                         var dir = action.ToDirection();
-                        if (isInField(player.Position.Move(dir)) && canPass(player.Position.Move(dir)))
+                        if (isInField(player.Position.Move(dir)) && isPassable(player.Position.Move(dir)))
                             player.Move(dir);
                         else
                             player.ChangeDirection(action);
@@ -124,27 +124,34 @@ namespace DiceStg_Online.Core
             return (pos.X >= 0 && pos.Y >= 0 && pos.X < State.Field.Width && pos.Y < State.Field.Height);
         }
         
-        private bool canPass(Point pos)
+        /// <summary>
+        /// その場所が通行可能か
+        /// </summary>
+        /// <param name="pos">調べる場所</param>
+        /// <returns>通行可能か</returns>
+        private bool isPassable(Point pos)
         {
-            return !(getObject(pos) is Player);
+            // posがフィールド上にあり、どのプレイヤーもいないか
+            return isInField(pos) && getObjects(pos).Select(obj => obj is Player).Count() == 0;
         }
 
-        private IDiceStgObject getObject(Point pos)
+        private List<IDiceStgObject> getObjects(Point pos)
         {
+            List<IDiceStgObject> objects = new List<IDiceStgObject>();
             foreach(Player p in State.Players)
             {
-                if(p.Position == pos)
+                if(p.Alive && p.Position == pos)
                 {
-                    return p;
+                    objects.Add(p);
                 }
 
-                if(p.MyBullet.Position == pos)
+                if(p.MyBullet.IsEnable && p.MyBullet.Position == pos)
                 {
-                    return p.MyBullet;
+                    objects.Add(p.MyBullet);
                 }
             }
 
-            return null;
+            return objects;
         }
     }
 }
