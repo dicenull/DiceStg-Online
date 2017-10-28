@@ -140,12 +140,12 @@ namespace DiceStg_Online.Core
             List<IDiceStgObject> objects = new List<IDiceStgObject>();
             foreach(Player p in State.Players)
             {
-                if(p.Position == pos)
+                if(p.Alive && p.Position == pos)
                 {
                     objects.Add(p);
                 }
 
-                if(p.MyBullet.Position == pos && p.MyBullet.IsEnable)
+                if(p.MyBullet.IsEnable && p.MyBullet.Position == pos)
                 {
                     objects.Add(p.MyBullet);
                 }
